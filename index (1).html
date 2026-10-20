@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
+  <title>Bryan's Website</title>
+  <style>
+    :root {
+      --accent: #f5f5f5;
+      --accent-dark: #ffffff;
+      --text: #f5f5f5;
+      --muted: #bdbdbd;
+      --bg: #090909;
+      --surface: #171717;
+      --border: #454545;
+      --soft: #282828;
+      --max-width: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent-dark);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(9, 9, 9, 0.96);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-wrap {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text);
+      padding: 0.35rem 0.45rem;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      background: var(--soft);
+      color: var(--accent-dark);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    section {
+      scroll-margin-top: 100px;
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-content: center;
+      gap: 1rem;
+    }
+
+    .eyebrow {
+      color: var(--accent-dark);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    .lead {
+      max-width: 700px;
+      font-size: 1.2rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .button-link {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--accent);
+      color: #090909;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+
+    .button-link:hover {
+      background: var(--accent-dark);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .card.featured {
+      border-top: 4px solid var(--accent);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      background: var(--soft);
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .placeholder {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .note {
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.1rem;
+      border-radius: 6px;
+      max-width: 760px;
+    }
+
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 760px) {
+      .nav-wrap {
+        align-items: flex-start;
+      }
+
+      nav ul {
+        gap: 0.35rem 0.6rem;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 3.5rem 0;
+      }
+
+      .hero {
+        min-height: 62vh;
+      }
+    }
+
+    /* AI portfolio project: reusable project block styles */
+    .project-showcase { margin-top: 1.8rem; padding: 1.6rem; border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 12px; background: var(--surface); box-shadow: 0 6px 20px rgba(0, 0, 0, .12); }
+    .project-showcase h3 { font-size: 1.55rem; margin: .3rem 0 .7rem; }
+    .project-showcase h4 { font-size: 1.08rem; margin: 1.3rem 0 .5rem; }
+    .project-showcase p { max-width: 82ch; }
+    .project-showcase .project-meta { color: var(--muted); font-size: .9rem; }
+    .project-showcase .project-highlights { padding-left: 1.25rem; }
+    .project-showcase li { margin-bottom: .45rem; }
+    .project-showcase details { background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 1rem; margin-top: .8rem; }
+    .project-showcase summary { color: var(--accent-dark); font-weight: 700; cursor: pointer; }
+    .project-showcase summary:focus-visible, .project-showcase a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+    .workflow { display: grid; gap: .6rem; max-width: 670px; margin: 1.1rem auto; text-align: center; }
+    .workflow-step { border: 1px solid var(--border); background: var(--surface); padding: .8rem; border-radius: 9px; }
+    .workflow-step strong { display: block; }
+    .workflow-arrow { text-align: center; color: var(--accent-dark); font-weight: bold; }
+    .workflow-branch { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .7rem; }
+    .project-showcase .file-link { display: inline-block; padding: .6rem .85rem; margin-top: .65rem; border: 1px solid var(--accent); border-radius: 7px; text-decoration: none; font-weight: 700; }
+    .project-showcase .file-link:hover { background: var(--soft); }
+    /* Black and white monochrome theme */
+    body { background: radial-gradient(ellipse 800px 480px at 90% 4%, #242424 0%, transparent 76%), var(--bg); }
+    .hero h1 { color: #ffffff; }
+    .card, .project-showcase { box-shadow: 0 12px 34px rgba(0, 0, 0, .23); }
+    .button-link:hover { background: #d4d4d4; color: #090909; }
+    .tag { border: 1px solid #606060; }
+    .project-showcase details[open] { border-color: #a3a3a3; }
+    ::selection { background: #eeeeee; color: #090909; }
+    :focus-visible { outline-color: #ffffff; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (max-width: 520px) { .project-showcase { padding: 1rem; } .workflow-branch { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <!-- Site header and navigation -->
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home">Bryan's Website</a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#skills">Skills &amp; Interests</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Home section -->
+    <section id="home" class="hero">
+      <div class="eyebrow">Personal Website Draft</div>
+      <h1>Bryan's Website</h1>
+      <p class="lead">Welcome to my website draft.</p>
+      <div>
+        <a class="button-link" href="#portfolio">View my portfolio</a>
+      </div>
+    </section>
+
+    <!-- About section -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="note">
+        <strong>Welcome! I'm Bryan.</strong>
+        <p>I'm a college student interested in business, management, and how technology is changing the workplace. I enjoy learning new skills and finding practical ways to solve problems.</p>
+        <p>Through my coursework, I've explored leadership, communication, and the use of AI in human resources. Projects involving AI agents and Python have helped me understand both the possibilities of these tools and why human judgment is still important.</p>
+        <p>I'm continuing to build my skills and prepare for future opportunities in business and management. This website is where I share my projects, what I've learned, and how I'm growing along the way.</p>
+      </div>
+    </section>
+
+    <!-- Portfolio section -->
+    <section id="portfolio">
+      <h2>Portfolio</h2>
+      <p>Here is one classroom project I am starting with.</p>
+
+      <div class="card-grid">
+        <article class="card featured">
+          <span class="tag">Classroom prototype</span>
+          <h3>Email Tone Report Using Python</h3>
+          <p>
+            For my class, I created a Python classroom prototype using simulated email data to identify words that could make an email sound harsh.
+            I chose the words the program would look for and helped improve the appearance of the results by changing the chart colors.
+          </p>
+          <p>
+            This project helped me learn how Python can be used to analyze information and present results visually.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Future project</span>
+          <h3>Project placeholder 2</h3>
+          <p class="placeholder">
+            I can add another class, work, or community project here later.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Future project</span>
+          <h3>Project placeholder 3</h3>
+          <p class="placeholder">
+            I can add a future project here when I have something else I want to showcase.
+          </p>
+        </article>
+      </div>
+
+      <!-- AI PORTFOLIO PROJECT START: duplicate this article for future projects, and assign a unique id -->
+      <article class="project-showcase" id="ai-performance-appraisal" aria-labelledby="ai-project-title">
+        <span class="tag">AI &amp; HR classroom project</span>
+        <h3 id="ai-project-title">AI-Powered Performance Appraisal &amp; Language Analysis</h3>
+        <p class="project-meta">Classroom project using fictional data</p>
+        <p>I explored how four AI agents and Python language checks could help a manager prepare and examine an employee performance review. The goal was to highlight wording that might need clearer evidence while keeping decisions in human hands.</p>
+        <ul class="project-highlights">
+          <li><strong>Agent workflow:</strong> Organized notes, drafted an appraisal, checked wording, and prepared for a feedback conversation.</li>
+          <li><strong>Python analysis:</strong> Screened gender-associated terms, trait versus behavior patterns, and differences in feedback specificity.</li>
+          <li><strong>Comparison:</strong> Examined why an AI reviewer and fixed-rule scanners reached different findings on the same fictional appraisal.</li>
+        </ul>
+        <p><strong>My contribution:</strong> I set up the agents using the provided instructions and manually transferred information and outputs between stages. The agents did not automatically communicate with one another.</p>
+        <p><strong>One finding:</strong> Agent 3 flagged ten phrases, including “demonstrating a solid understanding of the work required,” because it described an impression without an observable example. The Python gender-wording scanner flagged its word-stem matches, while the other two scanners passed their classroom thresholds.</p>
+        <p><strong>What I learned:</strong> A statement such as “missed two meetings” is more informative than calling someone “unreliable.” I learned to check the evidence behind a flag rather than accept automated judgments as proof of bias.</p>
+        <p><strong>Limitations:</strong> These tools examine wording, not whether a manager's account is accurate or fair. The thresholds are classroom screening rules, and the results do not establish discrimination or proven time savings.</p>
+
+        <details>
+          <summary>Part 1: Explore my four-agent workflow</summary>
+          <p>Each agent had a separate responsibility. I entered the instructions and moved information manually. In this workflow, the draft was sent separately to the Bias Checker and Conversation Coach.</p>
+          <div class="workflow" role="img" aria-label="Manual agent workflow: Manager notes to Agent 1 Intake Analyst, then Agent 2 Appraisal Drafter. The completed appraisal branches to Agent 3 Bias Checker and Agent 4 Conversation Coach.">
+            <div class="workflow-step"><strong>Manager's notes</strong>Fictional employee observations and rating</div>
+            <div class="workflow-arrow" aria-hidden="true">↓ Manual transfer</div>
+            <div class="workflow-step"><strong>Agent 1 — Intake Analyst</strong>Sorts only supplied facts into four categories</div>
+            <div class="workflow-arrow" aria-hidden="true">↓ Manual transfer</div>
+            <div class="workflow-step"><strong>Agent 2 — Appraisal Drafter</strong>Creates a formal review aligned with the 3/5 rating</div>
+            <div class="workflow-arrow" aria-hidden="true">↓ Draft sent to both agents separately</div>
+            <div class="workflow-branch">
+              <div class="workflow-step"><strong>Agent 3 — Bias Checker</strong>Quotes phrases, explains concerns, and suggests rewrites</div>
+              <div class="workflow-step"><strong>Agent 4 — Conversation Coach</strong>Prepares talking points, responses, and follow-up actions</div>
+            </div>
+          </div>
+          <p><strong>Key safeguards:</strong> Agent 1 and Agent 2 were instructed not to invent performance details. Agent 3 was instructed to name the potential issue and quote exact wording. Agent 4 helped prepare a supportive but honest discussion. These are rules from the agent instructions, not proof that every output followed them perfectly.</p>
+        </details>
+
+        <details>
+          <summary>Part 2: Explore my Python NLP analysis and results</summary>
+          <p>The Python notebook used word-stem matching for gender-associated terms, grammar-based rules for trait and behavioral language, and sentiment plus evidence markers for specificity. These were screening checks, not a model I trained.</p>
+          <ul>
+            <li><strong>Gender-associated wording — flagged:</strong> 11 matched communal word stems and no agentic matches (100% of matched stems, not 100% of the review).</li>
+            <li><strong>Trait versus behavior — passed:</strong> 0% trait-only among sentences counted by that rule.</li>
+            <li><strong>Specificity — passed:</strong> 16.7 percentage-point difference under the classroom's 40-point flagging threshold.</li>
+          </ul>
+          <p><strong>Agent 3 comparison:</strong> It rated overall wording risk as medium and flagged ten passages. Unlike the Python trait scanner, Agent 3 flagged a trait-like description; unlike the Python gender-stem scanner, Agent 3 did not identify a meaningful gender-coded concern. A disagreement is a reason to check the wording and context, not proof either tool is right.</p>
+          <p><strong>Important limit:</strong> Words like “collaboration” and “support” can simply describe job duties. A word match by itself does not establish bias.</p>
+        </details>
+        <p><a class="file-link" href="bias_report.pdf" download>Download the nine-page bias audit (PDF)</a></p>
+      </article>
+      <!-- AI PORTFOLIO PROJECT END -->
+    </section>
+
+    <!-- Skills and interests section -->
+    <section id="skills">
+      <h2>Skills &amp; Interests</h2>
+      <div class="note">
+        <strong>Draft placeholder</strong>
+        <p class="placeholder">
+          I can add skills and interests here later after I decide what I want to include.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact section -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="note">
+        <strong>Draft placeholder</strong>
+        <p class="placeholder">
+          Contact details can be added later if I decide to share them.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    Personal website draft for MGMT 431: The Future of Work.
+  </footer>
+</body>
+</html>
